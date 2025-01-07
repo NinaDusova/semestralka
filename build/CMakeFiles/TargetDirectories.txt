@@ -1,0 +1,8 @@
+/home/ninadusova/semestralka/build/CMakeFiles/edit_cache.dir
+/home/ninadusova/semestralka/build/CMakeFiles/rebuild_cache.dir
+/home/ninadusova/semestralka/build/sockets-lib/CMakeFiles/sockets-lib.dir
+/home/ninadusova/semestralka/build/sockets-lib/CMakeFiles/edit_cache.dir
+/home/ninadusova/semestralka/build/sockets-lib/CMakeFiles/rebuild_cache.dir
+/home/ninadusova/semestralka/build/battleships/CMakeFiles/battleships.dir
+/home/ninadusova/semestralka/build/battleships/CMakeFiles/edit_cache.dir
+/home/ninadusova/semestralka/build/battleships/CMakeFiles/rebuild_cache.dir

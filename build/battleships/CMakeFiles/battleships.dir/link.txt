@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/battleships.dir/main.c.o CMakeFiles/battleships.dir/buffer.c.o CMakeFiles/battleships.dir/shm.c.o CMakeFiles/battleships.dir/syn_buffer.c.o -o battleships  -Wl,-rpath,/home/ninadusova/semestralka/build/sockets-lib ../sockets-lib/libsockets-lib.so 

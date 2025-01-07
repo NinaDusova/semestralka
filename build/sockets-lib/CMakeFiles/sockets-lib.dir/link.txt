@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -shared -Wl,-soname,libsockets-lib.so -o libsockets-lib.so "CMakeFiles/sockets-lib.dir/socket.c.o" 
