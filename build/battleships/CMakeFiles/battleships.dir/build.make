@@ -125,12 +125,42 @@ battleships/CMakeFiles/battleships.dir/syn_buffer.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/battleships.dir/syn_buffer.c.s"
 	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ninadusova/semestralka/battleships/syn_buffer.c -o CMakeFiles/battleships.dir/syn_buffer.c.s
 
+battleships/CMakeFiles/battleships.dir/server.c.o: battleships/CMakeFiles/battleships.dir/flags.make
+battleships/CMakeFiles/battleships.dir/server.c.o: /home/ninadusova/semestralka/battleships/server.c
+battleships/CMakeFiles/battleships.dir/server.c.o: battleships/CMakeFiles/battleships.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ninadusova/semestralka/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object battleships/CMakeFiles/battleships.dir/server.c.o"
+	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT battleships/CMakeFiles/battleships.dir/server.c.o -MF CMakeFiles/battleships.dir/server.c.o.d -o CMakeFiles/battleships.dir/server.c.o -c /home/ninadusova/semestralka/battleships/server.c
+
+battleships/CMakeFiles/battleships.dir/server.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/battleships.dir/server.c.i"
+	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ninadusova/semestralka/battleships/server.c > CMakeFiles/battleships.dir/server.c.i
+
+battleships/CMakeFiles/battleships.dir/server.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/battleships.dir/server.c.s"
+	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ninadusova/semestralka/battleships/server.c -o CMakeFiles/battleships.dir/server.c.s
+
+battleships/CMakeFiles/battleships.dir/client.c.o: battleships/CMakeFiles/battleships.dir/flags.make
+battleships/CMakeFiles/battleships.dir/client.c.o: /home/ninadusova/semestralka/battleships/client.c
+battleships/CMakeFiles/battleships.dir/client.c.o: battleships/CMakeFiles/battleships.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/ninadusova/semestralka/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object battleships/CMakeFiles/battleships.dir/client.c.o"
+	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT battleships/CMakeFiles/battleships.dir/client.c.o -MF CMakeFiles/battleships.dir/client.c.o.d -o CMakeFiles/battleships.dir/client.c.o -c /home/ninadusova/semestralka/battleships/client.c
+
+battleships/CMakeFiles/battleships.dir/client.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/battleships.dir/client.c.i"
+	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/ninadusova/semestralka/battleships/client.c > CMakeFiles/battleships.dir/client.c.i
+
+battleships/CMakeFiles/battleships.dir/client.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/battleships.dir/client.c.s"
+	cd /home/ninadusova/semestralka/build/battleships && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/ninadusova/semestralka/battleships/client.c -o CMakeFiles/battleships.dir/client.c.s
+
 # Object files for target battleships
 battleships_OBJECTS = \
 "CMakeFiles/battleships.dir/main.c.o" \
 "CMakeFiles/battleships.dir/buffer.c.o" \
 "CMakeFiles/battleships.dir/shm.c.o" \
-"CMakeFiles/battleships.dir/syn_buffer.c.o"
+"CMakeFiles/battleships.dir/syn_buffer.c.o" \
+"CMakeFiles/battleships.dir/server.c.o" \
+"CMakeFiles/battleships.dir/client.c.o"
 
 # External object files for target battleships
 battleships_EXTERNAL_OBJECTS =
@@ -139,10 +169,12 @@ battleships/battleships: battleships/CMakeFiles/battleships.dir/main.c.o
 battleships/battleships: battleships/CMakeFiles/battleships.dir/buffer.c.o
 battleships/battleships: battleships/CMakeFiles/battleships.dir/shm.c.o
 battleships/battleships: battleships/CMakeFiles/battleships.dir/syn_buffer.c.o
+battleships/battleships: battleships/CMakeFiles/battleships.dir/server.c.o
+battleships/battleships: battleships/CMakeFiles/battleships.dir/client.c.o
 battleships/battleships: battleships/CMakeFiles/battleships.dir/build.make
 battleships/battleships: sockets-lib/libsockets-lib.so
 battleships/battleships: battleships/CMakeFiles/battleships.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ninadusova/semestralka/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C executable battleships"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/ninadusova/semestralka/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable battleships"
 	cd /home/ninadusova/semestralka/build/battleships && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/battleships.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

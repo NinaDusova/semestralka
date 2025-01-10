@@ -1,6 +1,7 @@
-battleships/CMakeFiles/battleships.dir/syn_buffer.c.o: \
- /home/ninadusova/semestralka/battleships/syn_buffer.c \
+battleships/CMakeFiles/battleships.dir/server.c.o: \
+ /home/ninadusova/semestralka/battleships/server.c \
  /usr/include/stdc-predef.h \
+ /home/ninadusova/semestralka/battleships/server.h \
  /home/ninadusova/semestralka/battleships/syn_buffer.h \
  /usr/include/fcntl.h /usr/include/features.h \
  /usr/include/features-time64.h \
@@ -36,7 +37,9 @@ battleships/CMakeFiles/battleships.dir/syn_buffer.c.o: \
  /home/ninadusova/semestralka/battleships/shm.h \
  /home/ninadusova/semestralka/battleships/names.h \
  /home/ninadusova/semestralka/battleships/buffer.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+ /home/ninadusova/semestralka/battleships/../sockets-lib/socket.h \
+ /usr/include/stdio.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/lib/gcc/x86_64-linux-gnu/13/include/stdarg.h \
  /usr/include/x86_64-linux-gnu/bits/types/__fpos_t.h \
@@ -57,4 +60,12 @@ battleships/CMakeFiles/battleships.dir/syn_buffer.c.o: \
  /usr/include/x86_64-linux-gnu/bits/waitstatus.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /usr/include/unistd.h /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
+ /usr/include/x86_64-linux-gnu/bits/environments.h \
+ /usr/include/x86_64-linux-gnu/bits/confname.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd-decl.h \
+ /usr/include/x86_64-linux-gnu/bits/unistd_ext.h \
+ /home/ninadusova/semestralka/battleships/grid.h

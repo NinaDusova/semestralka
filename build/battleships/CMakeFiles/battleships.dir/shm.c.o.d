@@ -64,4 +64,5 @@ battleships/CMakeFiles/battleships.dir/shm.c.o: \
  /usr/include/x86_64-linux-gnu/bits/stdlib.h \
  /home/ninadusova/semestralka/battleships/shm.h \
  /home/ninadusova/semestralka/battleships/names.h \
- /home/ninadusova/semestralka/battleships/buffer.h
+ /home/ninadusova/semestralka/battleships/buffer.h \
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h

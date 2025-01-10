@@ -44,23 +44,9 @@ battleships/CMakeFiles/battleships.dir/main.c.o: \
  /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-bsearch.h \
  /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
- /usr/include/x86_64-linux-gnu/bits/stdlib.h \
- /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h /usr/include/ctype.h \
- /usr/include/x86_64-linux-gnu/bits/endian.h \
- /usr/include/x86_64-linux-gnu/bits/endianness.h /usr/include/pthread.h \
- /usr/include/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_timespec.h \
- /usr/include/time.h /usr/include/x86_64-linux-gnu/bits/time.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_tm.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_itimerspec.h \
- /usr/include/x86_64-linux-gnu/bits/sched.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct_sched_param.h \
- /usr/include/x86_64-linux-gnu/bits/cpu-set.h \
- /usr/include/x86_64-linux-gnu/bits/setjmp.h \
- /usr/include/x86_64-linux-gnu/bits/types/__sigset_t.h \
- /usr/include/x86_64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
- /usr/include/string.h \
+ /usr/include/x86_64-linux-gnu/bits/stdlib.h /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
+ /home/ninadusova/semestralka/battleships/client.h \
  /home/ninadusova/semestralka/battleships/syn_buffer.h \
  /usr/include/fcntl.h /usr/include/x86_64-linux-gnu/bits/fcntl.h \
  /usr/include/x86_64-linux-gnu/bits/fcntl-linux.h \
@@ -72,4 +58,6 @@ battleships/CMakeFiles/battleships.dir/main.c.o: \
  /home/ninadusova/semestralka/battleships/shm.h \
  /home/ninadusova/semestralka/battleships/names.h \
  /home/ninadusova/semestralka/battleships/buffer.h \
- /home/ninadusova/semestralka/battleships/../sockets-lib/socket.h
+ /usr/lib/gcc/x86_64-linux-gnu/13/include/stdbool.h \
+ /home/ninadusova/semestralka/battleships/../sockets-lib/socket.h \
+ /home/ninadusova/semestralka/battleships/server.h

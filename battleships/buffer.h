@@ -1,8 +1,21 @@
 #ifndef BUFFER
 #define BUFFER
 #include <stddef.h>
+#include <stdbool.h>
 
 #define BUFFER_CAPACITY 3
+
+#define ROWS 10
+#define COLS 10
+
+typedef struct cell{
+    bool occupied;
+    char symbol;
+} Cell;
+
+typedef struct grid{
+    Cell grid[ROWS][COLS];
+} Grid;
 
 typedef struct game_action {
     int action_type;
@@ -10,7 +23,8 @@ typedef struct game_action {
     int x;
     int y;
     int result;
-    char ships[10][10]; //plocha s lodami
+    Grid ships; //plocha s lodami
+    Grid opponent; //plocha s lodami
 } game_action;
 
 typedef struct buffer {

@@ -154,6 +154,30 @@ buffer.c.s:
 	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/buffer.c.s
 .PHONY : buffer.c.s
 
+client.o: client.c.o
+.PHONY : client.o
+
+# target to build an object file
+client.c.o:
+	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/client.c.o
+.PHONY : client.c.o
+
+client.i: client.c.i
+.PHONY : client.i
+
+# target to preprocess a source file
+client.c.i:
+	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/client.c.i
+.PHONY : client.c.i
+
+client.s: client.c.s
+.PHONY : client.s
+
+# target to generate assembly for a file
+client.c.s:
+	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/client.c.s
+.PHONY : client.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -177,6 +201,30 @@ main.s: main.c.s
 main.c.s:
 	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/main.c.s
 .PHONY : main.c.s
+
+server.o: server.c.o
+.PHONY : server.o
+
+# target to build an object file
+server.c.o:
+	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/server.c.o
+.PHONY : server.c.o
+
+server.i: server.c.i
+.PHONY : server.i
+
+# target to preprocess a source file
+server.c.i:
+	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/server.c.i
+.PHONY : server.c.i
+
+server.s: server.c.s
+.PHONY : server.s
+
+# target to generate assembly for a file
+server.c.s:
+	cd /home/ninadusova/semestralka/build && $(MAKE) $(MAKESILENT) -f battleships/CMakeFiles/battleships.dir/build.make battleships/CMakeFiles/battleships.dir/server.c.s
+.PHONY : server.c.s
 
 shm.o: shm.c.o
 .PHONY : shm.o
@@ -238,9 +286,15 @@ help:
 	@echo "... buffer.o"
 	@echo "... buffer.i"
 	@echo "... buffer.s"
+	@echo "... client.o"
+	@echo "... client.i"
+	@echo "... client.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... server.o"
+	@echo "... server.i"
+	@echo "... server.s"
 	@echo "... shm.o"
 	@echo "... shm.i"
 	@echo "... shm.s"

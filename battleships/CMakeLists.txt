@@ -1,5 +1,5 @@
 add_executable(battleships)
-target_sources(battleships PRIVATE main.c buffer.c shm.c syn_buffer.c)
+target_sources(battleships PRIVATE main.c buffer.c shm.c syn_buffer.c server.c client.c)
 target_link_libraries(battleships PRIVATE sockets-lib)
 target_compile_options(battleships PRIVATE "-O3" "-std=c11")
 target_compile_definitions(battleships PRIVATE _XOPEN_SOURCE=500)

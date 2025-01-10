@@ -47,8 +47,10 @@ void passive_socket_destroy(int socket) {
 }
  
 int connect_to_server(const char * name, const int port) {
-  struct addrinfo * server;
-  struct addrinfo hints;
+  //struct addrinfo * server;
+  //struct addrinfo hints;
+  struct addrinfo hints, *server;
+  memset(&hints, 0, sizeof(hints));
   hints.ai_family = AF_INET; // IP4 aj IP6
   hints.ai_socktype = SOCK_STREAM; // SpoÄ¾ahlivÃ¡ komunikÃ¡cia
   // hints.ai_protocol = IPPROTO_TCP; // TCP/IP
@@ -59,6 +61,7 @@ int connect_to_server(const char * name, const int port) {
   int s = getaddrinfo(name, portText, &hints, &server);
   if (s != 0) {
     fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(s));
+    fprintf(stderr, "Chyba zaistenia adresy servera!\n");
     return -1;
   }
   for (struct addrinfo * rp = server; rp != NULL; rp = rp->ai_next) {

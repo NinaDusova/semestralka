@@ -9,7 +9,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/ninadusova/semestralka/battleships/buffer.c" "battleships/CMakeFiles/battleships.dir/buffer.c.o" "gcc" "battleships/CMakeFiles/battleships.dir/buffer.c.o.d"
+  "/home/ninadusova/semestralka/battleships/client.c" "battleships/CMakeFiles/battleships.dir/client.c.o" "gcc" "battleships/CMakeFiles/battleships.dir/client.c.o.d"
   "/home/ninadusova/semestralka/battleships/main.c" "battleships/CMakeFiles/battleships.dir/main.c.o" "gcc" "battleships/CMakeFiles/battleships.dir/main.c.o.d"
+  "/home/ninadusova/semestralka/battleships/server.c" "battleships/CMakeFiles/battleships.dir/server.c.o" "gcc" "battleships/CMakeFiles/battleships.dir/server.c.o.d"
   "/home/ninadusova/semestralka/battleships/shm.c" "battleships/CMakeFiles/battleships.dir/shm.c.o" "gcc" "battleships/CMakeFiles/battleships.dir/shm.c.o.d"
   "/home/ninadusova/semestralka/battleships/syn_buffer.c" "battleships/CMakeFiles/battleships.dir/syn_buffer.c.o" "gcc" "battleships/CMakeFiles/battleships.dir/syn_buffer.c.o.d"
   )
