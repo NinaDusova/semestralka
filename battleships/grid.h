@@ -3,6 +3,23 @@
 
 #include "buffer.h"
 
+static inline bool has_exactly_20_X(Grid *grid) {
+    int count = 0; 
+    
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++) {
+            if (grid->grid[i][j].occupied && grid->grid[i][j].symbol == 'X') {
+                count++;
+            }
+            if (count > 20) {
+                return false;
+            }
+        }
+    }
+
+    return count == 20;
+}
+
 static inline bool can_place_ship(const Grid *g, int row, int col, int length, bool horizontal) {
     if (horizontal) {
         if (col + length > COLS) return false;
@@ -89,6 +106,7 @@ static inline void draw_grid(const Grid *g1, const Grid *g2) {
     }
 
     if (g2 == NULL) {
+        printf("\033[0m\n");
         return;
     }
 

@@ -78,11 +78,48 @@ void *run_client(shared_names *names) {
 
     while (1) {
         game_action action;
+
+        if (read(server_fd, &action, sizeof(game_action)) == -1) {
+            perror("Failed to receive action from server");
+            break;
+        }
+        
         syn_shm_buffer_pop(&buff, &action);
         opponent_grid = action.opponent;
         temp_grid_my = action.ships;
 
-        draw_grid(&opponent_grid, &temp_grid_my);
+        switch (action.result) {
+            case 0:
+                printf("----------------\nHit.\n----------------\n");
+                break;
+            case 1:
+                printf("----------------\nMiss.\n----------------\n");
+                break;
+            case 2:
+                draw_grid(&temp_grid_my, &opponent_grid);
+                printf("----------------\nYOU WIN. C:\n----------------\n");
+                printf("W       W   IIIII   N     N\n");
+                printf("W       W     I     NN    N\n");
+                printf("W   W   W     I     N N   N\n");
+                printf("W  W W  W     I     N  N  N\n");
+                printf("W W   W W     I     N   N N\n");
+                printf("WW     WW     I     N    NN\n");
+                printf("W       W   IIIII   N     N\n");
+                goto end_game;
+               // break;
+            default:
+                draw_grid(&temp_grid_my, &opponent_grid);
+                printf("----------------\nYOU LOSE :C.\n----------------\n");
+                printf("L         OOOOO   SSSSS   EEEEE\n");
+                printf("L        O     O  S       E    \n");
+                printf("L        O     O   SSSSS   EEEE \n");
+                printf("L        O     O        S  E    \n");
+                printf("LLLLLLL   OOOOO   SSSSS   EEEEE\n");
+                goto end_game;
+                //break;
+        }
+        
+        draw_grid(&temp_grid_my, &opponent_grid);
 
         printf("Enter action type (0=move, 1=attack), x, y:\n");
         if (scanf("%d %d %d", &action.action_type, &action.x, &action.y) != 3) {
@@ -96,6 +133,7 @@ void *run_client(shared_names *names) {
         }
 
     }
+    end_game:
 
     close(server_fd);
     syn_shm_buffer_close(&buff);
