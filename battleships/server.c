@@ -144,10 +144,10 @@ void *handle_client(void *arg) {
         }
 
         
-        if (write(client_fd, &action, sizeof(game_action)) == -1) {
+        /*if (write(client_fd, &action, sizeof(game_action)) == -1) {
             perror("Failed to send action to player");
             break;
-        }
+        }*/
 
         bytes_read = read(client_fd, &action, sizeof(game_action));
         if (bytes_read <= 0) {
@@ -155,7 +155,7 @@ void *handle_client(void *arg) {
             break;
         }
 
-        printf("Player %d action: type=%d, x=%d, y=%d\n", action.player_id, action.action_type, action.x, action.y);
+        printf("Player %d: x=%d, y=%d\n", action.player_id + 1 , action.x, action.y);
 
         //int result_num = process_action(&action, &action.opponent, 2);
         //int result_num = process_action(&action, &check_grid, 2);

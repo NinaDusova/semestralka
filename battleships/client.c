@@ -13,6 +13,32 @@ void deserialize_grid(Grid *grid, const char *buffer) {
     memcpy(grid, buffer, sizeof(Grid));
 }
 
+bool readAction(game_action *action) {
+    char temp_x;
+    printf("Enter action type x, y [A1]:\n");
+
+    if (scanf(" %c%d", &temp_x, &action->y) != 2) {
+        printf("Invalid input or EOF.\n");
+        return false; 
+    }
+
+    // Overenie a konverzia znaku
+    if (temp_x >= 'A' && temp_x <= 'J') {
+        action->x = temp_x - 'A' + 1;
+        return true; 
+    } else {
+        printf("Invalid input for x. Must be a letter between A and J.\n");
+        return false;
+    }
+
+    if (action->y >= 1 && action->y <= 10) {
+        return true; 
+    } else {
+        printf("Invalid input for y. Must be a number between 1 and 10.\n");
+        return false;
+    }
+}
+
 int request_random_layout(int server_fd, Grid *grid) {
     if (write(server_fd, "random", strlen("random") + 1) == -1) {
         perror("Failed to request random layout from server");
@@ -95,14 +121,13 @@ void *run_client(shared_names *names) {
         
         printf("Server response: %s\n", buffer); 
 
-        bytes_read = read(server_fd, &action, sizeof(game_action));
+       /* bytes_read = read(server_fd, &action, sizeof(game_action));
         if (bytes_read < 1) {
             perror("Failed to receive action from server");
             break;
-        }
+        }*/
 
         // Získať akciu zo servera cez buffer
-        printf("Received action from server.\n");
         syn_shm_buffer_pop(&buff, &action);
         printf("Action popped from buffer.\n");
         
@@ -138,25 +163,21 @@ void *run_client(shared_names *names) {
                 printf("LLLLLLL   OOOOO   SSSSS   EEEEE\n");
                 goto end_game;
         }
-
-        printf("Opponent's grid:\n");
         
         draw_grid(&temp_grid_my, &opponent_grid);
 
-        printf("Enter action type (0=move, 1=attack), x, y:\n");
-        if (scanf("%d %d %d", &action.action_type, &action.x, &action.y) != 3) {
-            printf("Invalid input or EOF. Exiting...\n");
+
+        while (true) {
+        if (readAction(&action)) {
             break;
         }
-
-        // Pushnúť akciu do bufferu
-        //syn_shm_buffer_push(&buff, &action);
+            printf("Please try again.\n");
+        }
 
         if (write(server_fd, &action, sizeof(game_action)) == -1) {
             perror("Failed to send data to server");
             break;
         }
-
     }
 end_game:
 
