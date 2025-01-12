@@ -35,15 +35,21 @@ void *run_client(shared_names *names) {
     int server_fd = connect_to_server("localhost", SOCKET_PC); 
     if (server_fd < 0) {
         perror("Failed to connect to server");
-        printf("%d\n", server_fd);
         syn_shm_buffer_close(&buff);
         exit(EXIT_FAILURE);
     } 
 
+    int client_id;
+    if (read(server_fd, &client_id, sizeof(client_id)) == -1) {
+        perror("Failed to receive client ID");
+        close(server_fd);
+        syn_shm_buffer_close(&buff);
+        exit(EXIT_FAILURE);
+    }
+
     printf("Connected to the server. Enter your moves.\n");
     char buffer[LOCAL_BUFFER_SIZE];
 
-    
     Grid temp_grid_my, opponent_grid;
     init_grid(&temp_grid_my);
 
@@ -75,16 +81,32 @@ void *run_client(shared_names *names) {
     }
 
     init_grid(&opponent_grid);
+    printf("Grid initialized.\n");
+    ssize_t bytes_read;
 
     while (1) {
         game_action action;
 
-        if (read(server_fd, &action, sizeof(game_action)) == -1) {
-            perror("Failed to receive action from server");
+        ssize_t bytes_read = read(server_fd, buffer, sizeof(buffer));
+        if (bytes_read <= 0) {
+            printf("Failed to receive confirmation from server.\n");
             break;
         }
         
+        printf("Server response: %s\n", buffer); 
+
+        bytes_read = read(server_fd, &action, sizeof(game_action));
+        if (bytes_read < 1) {
+            perror("Failed to receive action from server");
+            break;
+        }
+
+        // Získať akciu zo servera cez buffer
+        printf("Received action from server.\n");
         syn_shm_buffer_pop(&buff, &action);
+        printf("Action popped from buffer.\n");
+        
+        // Aktualizovať mriežky podľa akcie
         opponent_grid = action.opponent;
         temp_grid_my = action.ships;
 
@@ -106,7 +128,6 @@ void *run_client(shared_names *names) {
                 printf("WW     WW     I     N    NN\n");
                 printf("W       W   IIIII   N     N\n");
                 goto end_game;
-               // break;
             default:
                 draw_grid(&temp_grid_my, &opponent_grid);
                 printf("----------------\nYOU LOSE :C.\n----------------\n");
@@ -116,8 +137,9 @@ void *run_client(shared_names *names) {
                 printf("L        O     O        S  E    \n");
                 printf("LLLLLLL   OOOOO   SSSSS   EEEEE\n");
                 goto end_game;
-                //break;
         }
+
+        printf("Opponent's grid:\n");
         
         draw_grid(&temp_grid_my, &opponent_grid);
 
@@ -127,13 +149,16 @@ void *run_client(shared_names *names) {
             break;
         }
 
+        // Pushnúť akciu do bufferu
+        //syn_shm_buffer_push(&buff, &action);
+
         if (write(server_fd, &action, sizeof(game_action)) == -1) {
             perror("Failed to send data to server");
             break;
         }
 
     }
-    end_game:
+end_game:
 
     close(server_fd);
     syn_shm_buffer_close(&buff);

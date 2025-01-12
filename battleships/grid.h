@@ -11,13 +11,13 @@ static inline bool has_exactly_20_X(Grid *grid) {
             if (grid->grid[i][j].occupied && grid->grid[i][j].symbol == 'X') {
                 count++;
             }
-            if (count > 20) {
+            if (count > 4) {
                 return false;
             }
         }
     }
 
-    return count == 20;
+    return count == 4;
 }
 
 static inline bool can_place_ship(const Grid *g, int row, int col, int length, bool horizontal) {
@@ -69,9 +69,9 @@ static inline void clear_grid(Grid *g) {
 static inline void randomly_place_ships(Grid *g) {
     clear_grid(g);
     place_ship(g, 4); 
-    for (int i = 0; i < 2; i++) place_ship(g, 3);
-    for (int i = 0; i < 3; i++) place_ship(g, 2);
-    for (int i = 0; i < 4; i++) place_ship(g, 1);
+    //for (int i = 0; i < 2; i++) place_ship(g, 3);
+    //for (int i = 0; i < 3; i++) place_ship(g, 2);
+    //for (int i = 0; i < 4; i++) place_ship(g, 1);
 }
 
 static inline void init_grid(Grid *g) {

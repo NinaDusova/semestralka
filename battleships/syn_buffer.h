@@ -4,6 +4,7 @@
 #include <fcntl.h>
 #include <sys/stat.h>
 #include <semaphore.h>
+#include <pthread.h>
 #include "shm.h"
 
 typedef struct synchronized_buffer {
@@ -12,6 +13,7 @@ typedef struct synchronized_buffer {
   sem_t *mut_pc_;
   sem_t *sem_produce_;
   sem_t *sem_consume_;
+  pthread_mutex_t mutex; // Mutex pre synchronizáciu
 } synchronized_buffer;
 
 void syn_shm_buffer_init(shared_names *names);
