@@ -7,7 +7,7 @@
 #include "grid.h"
 
 #define LOCAL_BUFFER_SIZE 2028
-#define SOCKET_PC 5088
+#define SOCKET_PC 5089
 
 void deserialize_grid(Grid *grid, const char *buffer) {
     memcpy(grid, buffer, sizeof(Grid));
@@ -74,7 +74,7 @@ void *run_client(shared_names *names) {
     }
 
     printf("Connected to the server. Enter your moves.\n");
-    char buffer[LOCAL_BUFFER_SIZE];
+
 
     Grid temp_grid_my, opponent_grid;
     init_grid(&temp_grid_my);
@@ -83,7 +83,7 @@ void *run_client(shared_names *names) {
     while (1) {
         draw_grid(&temp_grid_my, NULL);
 
-        printf("Enter 'random' to generate new ship layout or 'accept' to confirm:\n");
+        printf("[PLAYER%d]Enter 'random' to generate new ship layout or 'accept' to confirm:\n", client_id + 1);
         if (fgets(command, sizeof(command), stdin) == NULL) {
             printf("Input error or EOF. Exiting...\n");
             break;
@@ -111,6 +111,7 @@ void *run_client(shared_names *names) {
     ssize_t bytes_read;
 
     while (1) {
+        char buffer[LOCAL_BUFFER_SIZE];
         game_action action;
 
         ssize_t bytes_read = read(server_fd, buffer, sizeof(buffer));
@@ -119,13 +120,44 @@ void *run_client(shared_names *names) {
             break;
         }
         
-        printf("Server response: %s\n", buffer); 
+        //printf("Server response: %s\n", buffer); 
+        //printf(".");
+        buffer[bytes_read] = '\0';
+
+        if (strcmp(buffer, "wait") == 0) {  // Správne porovnanie
+            continue;
+        }   else if (strcmp(buffer, "go") == 0) {
+            if (client_id == 0) {
+                syn_shm_buffer_pop(&buff, &action);
+                action.ships = temp_grid_my;
+                action.opponent = opponent_grid;
+                draw_grid(&temp_grid_my, &opponent_grid);
+                printf("AAAAAAAAAAAAAAAAAA.\n");
+            }
+        }/* else if (strcmp(buffer, "end") == 0) {
+            printf("Game ended.\n");
+            break;
+        } */
+        printf("%d Response from server: %s\n",client_id,  buffer);
 
        /* bytes_read = read(server_fd, &action, sizeof(game_action));
         if (bytes_read < 1) {
             perror("Failed to receive action from server");
             break;
         }*/
+
+        while (true) {
+            if (readAction(&action)) {
+            break;
+        }
+            printf("Please try again.\n");
+        }
+
+        
+        if (write(server_fd, &action, sizeof(game_action)) == -1) {
+            perror("Failed to send data to server");
+            break;
+        }
 
         // Získať akciu zo servera cez buffer
         syn_shm_buffer_pop(&buff, &action);
@@ -154,6 +186,10 @@ void *run_client(shared_names *names) {
                 printf("W       W   IIIII   N     N\n");
                 goto end_game;
             default:
+                if (write(server_fd, &action, sizeof(game_action)) == -1) {
+                perror("Failed to send data to server");
+                break;
+                }
                 draw_grid(&temp_grid_my, &opponent_grid);
                 printf("----------------\nYOU LOSE :C.\n----------------\n");
                 printf("L         OOOOO   SSSSS   EEEEE\n");
@@ -166,18 +202,7 @@ void *run_client(shared_names *names) {
         
         draw_grid(&temp_grid_my, &opponent_grid);
 
-
-        while (true) {
-        if (readAction(&action)) {
-            break;
-        }
-            printf("Please try again.\n");
-        }
-
-        if (write(server_fd, &action, sizeof(game_action)) == -1) {
-            perror("Failed to send data to server");
-            break;
-        }
+        printf("Wait for respond of other player.\n");
     }
 end_game:
 

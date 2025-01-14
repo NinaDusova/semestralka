@@ -49,7 +49,11 @@ int main(int argc, char *argv[]) {
     } else if(strcmp(argv[1], "server") == 0) {
         //run_consumer(PATH_COUNT, &names, argv[3]);
         //TODO implement consumer
+        //shm_init(&names);
+        //syn_shm_buffer_init(&names);
         run_server(&names);
+        //shm_destroy(&names);
+        //syn_shm_buffer_destroy(&names);
     } else {
         fprintf(stderr, "Nezadal sa spravny prikaz!\n");
         clear_names(&names);

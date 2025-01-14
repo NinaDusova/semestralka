@@ -8,7 +8,7 @@
 #include "syn_buffer.h"
 
 #define LOCAL_BUFFER_SIZE 2028
-#define SOCKET_PC 5088
+#define SOCKET_PC 5089
 
 typedef struct {
     int client_fd;
@@ -112,10 +112,10 @@ void *handle_client(void *arg) {
             }
         } else if (strncmp(command, "accept", 6) == 0) {
             printf("Player %d confirmed grid.\n", client_fd);
-            if (write(client_fd, "Grid accepted.", strlen("Grid accepted.") + 1) == -1) {
+           /* if (write(client_fd, "Grid accepted.", strlen("Grid accepted.") + 1) == -1) {
                 perror("Failed to send grid accepted message to client");
                 break;
-            }
+            }*/
             printf("Grid accepted message sent to client.\n");
             break;
         } else {
@@ -127,22 +127,48 @@ void *handle_client(void *arg) {
     action.player_id = client_id;
     action.ships = *client_info->player_grid;
     action.opponent = *client_info->check_grid;
-
-    Grid check_grid;
-    check_grid = *opponent_grid;
-
-    syn_shm_buffer_push(buff, &action);
+    action.result = 0;
 
     while (1) {
         if (*client_info->turn != client_id) {
-        if (write(client_fd, "wait", strlen("wait") + 1) == -1) {
-            perror("Failed to send wait message");
+            if (write(client_fd, "wait", strlen("wait") + 1) == -1) {
+                perror("Failed to send wait message");
+                break;
+            }
+            usleep(1000000);
+            continue;
+        } else {
+            if (write(client_fd, "go", strlen("go") + 1) == -1) {
+                perror("Failed to send wait message");
+                break;
+            }
+
+            if (client_id == 0) {
+                syn_shm_buffer_push(buff, &action); 
+            } else {
+                //syn_shm_buffer_push(buff, &action); 
+                //*client_info->turn = (*client_info->turn == 0) ? 1 : 0;
+            }
+            goto ihadto;
             break;
         }
-        usleep(100000);
-        continue;
-        }
+    }
 
+    while (1) { 
+        if (*client_info->turn != client_id) {
+            if (write(client_fd, "wait", strlen("wait") + 1) == -1) {
+                perror("Failed to send wait message");
+                break;
+            }
+            usleep(1000000);
+            continue;
+        } else {
+            if (write(client_fd, "free", strlen("free") + 1) == -1) {
+                perror("Failed to send wait message");
+                break;
+            }
+        }
+        ihadto:
         
         /*if (write(client_fd, &action, sizeof(game_action)) == -1) {
             perror("Failed to send action to player");
@@ -152,6 +178,10 @@ void *handle_client(void *arg) {
         bytes_read = read(client_fd, &action, sizeof(game_action));
         if (bytes_read <= 0) {
             printf("Client disconnected.\n");
+            break;
+        }
+
+        if (action.result == 3) {
             break;
         }
 
@@ -166,15 +196,20 @@ void *handle_client(void *arg) {
         action.opponent = *client_info->check_grid;
         action.result = result_num;
 
-        if (write(client_fd, &action, sizeof(game_action)) == -1) {
+        /*if (write(client_fd, &action, sizeof(game_action)) == -1) {
             perror("Failed to send action result to client");
             break;
-        }
+        }*/
         if (result_num == 2) {
+            if (write(client_fd, "end", strlen("end") + 1) == -1) {
+                perror("Failed to send wait message");
+                break;
+            }
             printf("Player %d wins!\n", action.player_id);
             syn_shm_buffer_push(buff, &action);
             action.result = 3;
             syn_shm_buffer_push(buff, &action);
+            *client_info->turn = (*client_info->turn == 0) ? 1 : 0;
             break;
         }
 
